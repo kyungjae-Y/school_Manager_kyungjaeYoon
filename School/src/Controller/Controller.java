@@ -1,4 +1,8 @@
-package School_윤경재Ver3;
+package Controller;
+
+import DAO.StudentDAO;
+import DAO.SubjectDAO;
+import Util.Utils;
 
 /*
 	무조건 파일 업로드 먼저
@@ -36,7 +40,7 @@ public class Controller {
 		System.out.println("[0] 종료");
 	}
 
-	void run() {
+	public void run() {
 		while (true) {
 			mainMenu();
 			int sel = Utils.getInstance().getInt("메뉴");

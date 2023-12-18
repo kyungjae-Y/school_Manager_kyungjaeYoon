@@ -1,4 +1,4 @@
-package School_윤경재Ver3;
+package Util;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

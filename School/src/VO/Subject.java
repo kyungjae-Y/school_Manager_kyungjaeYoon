@@ -1,4 +1,4 @@
-package School_윤경재Ver3;
+package VO;
 
 public class Subject {
 	private int stuNo;

@@ -1,7 +1,11 @@
-package School_윤경재Ver3;
+package DAO;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import Util.Utils;
+import VO.Student;
+import VO.Subject;
 
 public class SubjectDAO {
 	private ArrayList<Subject> subList;
