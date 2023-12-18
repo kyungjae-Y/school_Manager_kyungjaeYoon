@@ -2,7 +2,8 @@ package Controller;
 
 import DAO.StudentDAO;
 import DAO.SubjectDAO;
-import Util.Utils;
+import Util.FileManager;
+import Util.InputManager;
 
 /*
 	무조건 파일 업로드 먼저
@@ -12,6 +13,7 @@ import Util.Utils;
 public class Controller {
 	private StudentDAO stuDAO;
 	private SubjectDAO subDAO;
+	private FileManager fm;
 
 	public StudentDAO getStuDAO() {
 		return stuDAO;
@@ -24,8 +26,9 @@ public class Controller {
 	public Controller() {
 		stuDAO = new StudentDAO();
 		subDAO = new SubjectDAO();
-		stuDAO.fileToData(Utils.getInstance().fileLoad("student.txt"));
-		subDAO.fileToData(Utils.getInstance().fileLoad("subject.txt"));
+		fm = new FileManager();
+		getStuDAO().fileToData(fm.fileLoad("student.txt"));
+		getSubDAO().fileToData(fm.fileLoad("subject.txt"));
 	}
 
 	private void mainMenu() {
@@ -43,7 +46,7 @@ public class Controller {
 	public void run() {
 		while (true) {
 			mainMenu();
-			int sel = Utils.getInstance().getInt("메뉴");
+			int sel = InputManager.getInt("메뉴");
 			if (sel == 1) {
 				stuDAO.addStudent();
 			} else if (sel == 2) {
@@ -57,11 +60,10 @@ public class Controller {
 			} else if (sel == 6) {
 				subDAO.printSubject(stuDAO);
 			} else if (sel == 7) {
-				Utils.getInstance().fileSave(stuDAO.dataToFile(), "student.txt");
-				Utils.getInstance().fileSave(subDAO.dataToFile(), "subject.txt");
+				fm.fileSave(getStuDAO(), getSubDAO());
 			} else if (sel == 8) {
-				stuDAO.fileToData(Utils.getInstance().fileLoad("student.txt"));
-				subDAO.fileToData(Utils.getInstance().fileLoad("subject.txt"));
+				getStuDAO().fileToData(fm.fileLoad("student.txt"));
+				getSubDAO().fileToData(fm.fileLoad("subject.txt"));
 			} else {
 				System.out.println("프로그램 종료");
 				return;

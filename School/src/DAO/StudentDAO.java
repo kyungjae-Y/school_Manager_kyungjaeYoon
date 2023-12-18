@@ -2,7 +2,7 @@ package DAO;
 
 import java.util.ArrayList;
 
-import Util.Utils;
+import Util.InputManager;
 import VO.Student;
 
 public class StudentDAO {
@@ -23,14 +23,12 @@ public class StudentDAO {
 	}
 
 	public void addStudent() {
-		String id = Utils.getInstance().getStr("ID");
-		Utils.getInstance().nextLine();
+		String id = InputManager.getStr("ID");
 		if (stuIdValue(id) != -1) {
 			System.err.println("아이디 중복");
 			return;
 		}
-		String name = Utils.getInstance().getStr("이름");
-		Utils.getInstance().nextLine();
+		String name = InputManager.getStr("이름");
 		stuList.add(new Student("" + (maxNo++), name, id));
 		System.out.println("학생 추가 완료");
 	}
@@ -58,8 +56,7 @@ public class StudentDAO {
 			System.err.println("데이터가 없습니다");
 			return;
 		}
-		String id = Utils.getInstance().getStr("ID");
-		Utils.getInstance().nextLine();
+		String id = InputManager.getStr("ID");
 		int idx = stuIdValue(id);
 		if (idx == -1) {
 			System.err.println("ID 가 존재하지 않습니다");
@@ -71,7 +68,7 @@ public class StudentDAO {
 	}
 
 	public void addStudentSub(SubjectDAO subDAO) {
-		int stuNo = Utils.getInstance().getInt("학번");
+		int stuNo = InputManager.getInt("학번");
 		int idx = stuNoValue(stuNo);
 		if (idx == -1) {
 			System.err.println("ID 가 존재하지 않습니다");
@@ -81,7 +78,7 @@ public class StudentDAO {
 	}
 
 	public void delStudentSub(SubjectDAO subDAO) {
-		int stuNo = Utils.getInstance().getInt("학번");
+		int stuNo = InputManager.getInt("학번");
 		int idx = stuNoValue(stuNo);
 		if (idx == -1) {
 			System.err.println("ID 가 존재하지 않습니다");
@@ -153,6 +150,8 @@ public class StudentDAO {
 	}
 
 	public void fileToData(String data) {
+		if (data.length() == 0)
+			return;
 		String[] datas = data.split("\n");
 		for (int i = 0; i < datas.length; i++) {
 			String[] info = datas[i].split("/");

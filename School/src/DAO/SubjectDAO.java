@@ -3,7 +3,7 @@ package DAO;
 import java.util.ArrayList;
 import java.util.Random;
 
-import Util.Utils;
+import Util.InputManager;
 import VO.Student;
 import VO.Subject;
 
@@ -30,7 +30,7 @@ public class SubjectDAO {
 	}
 
 	public void addStudentSub(int stuNo) {
-		String subName = Utils.getInstance().getStr("과목");
+		String subName = InputManager.getStr("과목");
 		int idx = subNoValue(stuNo, subName);
 		int score = random.nextInt(50) + 50;
 		if (idx != -1) {
@@ -46,7 +46,7 @@ public class SubjectDAO {
 			System.err.println("과목 데이터가 존재하지 않습니다");
 			return;
 		}
-		String subName = Utils.getInstance().getStr("과목");
+		String subName = InputManager.getStr("과목");
 		int idx = subNoValue(stuNo, subName);
 		if (idx == -1) {
 			System.err.println("과목이 존재하지 않습니다");
@@ -68,7 +68,7 @@ public class SubjectDAO {
 	}
 
 	public void printSubject(StudentDAO stuDAO) {
-		String subName = Utils.getInstance().getStr("과목");
+		String subName = InputManager.getStr("과목");
 		boolean ck = true;
 		int cnt = 0;
 		for (int i = 0; i < subList.size(); i++) {
@@ -116,6 +116,9 @@ public class SubjectDAO {
 	}
 
 	public void fileToData(String data) {
+		subList.clear();
+		if (data.length() == 0)
+			return;
 		String[] datas = data.split("\n");
 		for (int i = 0; i < datas.length; i++) {
 			String[] info = datas[i].split("/");
